@@ -11,6 +11,6 @@ public class LinkedInTest extends Page{
 		readCSV();
 		login("",""); // enter your linkedin username and password
 		navigateToConnections();
-		sendMessageToConnections(10);
+		sendMessageToConnections(10,""); // Number of users you want to send message(ex:10), and the message
 	}
 }

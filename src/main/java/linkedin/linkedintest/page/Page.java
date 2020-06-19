@@ -88,7 +88,7 @@ public class Page {
 		total_connections = Integer.parseInt(totalConnectionsHeader.getText().replaceAll("[^\\d]", ""));
 	}
 
-	public void sendMessageToConnections(int today_count) throws InterruptedException {
+	public void sendMessageToConnections(int today_count,String message) throws InterruptedException {
 		int count = 0;
 		boolean flag = false;
 		while (set_allNames.size() < total_connections) {
@@ -98,7 +98,7 @@ public class Page {
 					if (!e.isDisplayed())
 						((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)", e);
 					System.out.println(e.getAttribute("aria-label"));
-					sendMessage(e);
+					sendMessage(e,message);
 					writeCSV(e);
 					count++;
 					if (count == today_count) {
@@ -112,7 +112,7 @@ public class Page {
 		}
 	}
 
-	public void sendMessage(WebElement e) throws InterruptedException {
+	public void sendMessage(WebElement e,String message) throws InterruptedException {
 		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOf(e));
 		driver.findElement(
@@ -121,7 +121,7 @@ public class Page {
 		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOf(messageBox)).click();
 		Thread.sleep(1000);
-		messageBox.sendKeys("Testing please ignore!");
+		messageBox.sendKeys(message);
 		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOf(sendCTA)).click();
 		Thread.sleep(1000);
