@@ -74,7 +74,7 @@ public class Page {
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 20), this);
 	}
 
-	public void login(String id,String pass) {
+	public void login(String id, String pass) {
 		wait.until(ExpectedConditions.visibilityOf(username));
 		username.sendKeys(id);
 		password.sendKeys(pass);
@@ -88,7 +88,7 @@ public class Page {
 		total_connections = Integer.parseInt(totalConnectionsHeader.getText().replaceAll("[^\\d]", ""));
 	}
 
-	public void sendMessageToConnections(int today_count,String message) throws InterruptedException {
+	public void sendMessageToConnections(int today_count, String message) throws InterruptedException {
 		int count = 0;
 		boolean flag = false;
 		while (set_allNames.size() < total_connections) {
@@ -98,7 +98,7 @@ public class Page {
 					if (!e.isDisplayed())
 						((JavascriptExecutor) driver).executeScript("window.scrollBy(0,50)", e);
 					System.out.println(e.getAttribute("aria-label"));
-					sendMessage(e,message);
+					sendMessage(e, message);
 					writeCSV(e);
 					count++;
 					if (count == today_count) {
@@ -112,7 +112,7 @@ public class Page {
 		}
 	}
 
-	public void sendMessage(WebElement e,String message) throws InterruptedException {
+	public void sendMessage(WebElement e, String message) throws InterruptedException {
 		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOf(e));
 		driver.findElement(
